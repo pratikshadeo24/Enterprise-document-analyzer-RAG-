@@ -1,0 +1,8 @@
+lancedb>=0.7.0
+sentence-transformers>=2.2.2
+torch           # CPU version installed automatically, okay for small models
+numpy
+pandas
+requests
+pypdf>=4.0.0
+python-docx

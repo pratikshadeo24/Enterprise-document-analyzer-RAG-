@@ -1,0 +1,8 @@
+LanceDB is a vector database built on top of the Lance columnar format.
+It is optimized for machine learning and AI workloads.
+
+Retrieval Augmented Generation (RAG) combines a vector search step
+with a large language model to answer questions based on external documents.
+
+This project is my personal learning project to build an enterprise-grade RAG system
+with metadata filtering, versioned document updates, and citations.

@@ -1,0 +1,3 @@
+This document describes policies for using the RAG system in production.
+All documents must be tagged with a sensitivity level and owner.
+Access control must be enforced using metadata filters in the retrieval layer.

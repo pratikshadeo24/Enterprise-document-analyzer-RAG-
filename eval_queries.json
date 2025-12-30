@@ -1,0 +1,124 @@
+[
+  {
+    "id": "q1",
+    "query": "What is a Retrieval-Augmented Generation (RAG) system?",
+    "answerable": true,
+    "expected_doc_keys": ["sample_docs", "rag_notes_tutorial"]
+  },
+  {
+    "id": "q2",
+    "query": "What are we building in this RAG project?",
+    "answerable": true,
+    "expected_doc_keys": ["sample_docs", "rag_notes_tutorial"]
+  },
+  {
+    "id": "q3",
+    "query": "Which vector database are we using in this project?",
+    "answerable": true,
+    "expected_doc_keys": ["sample_docs", "rag_notes_tutorial"]
+  },
+  {
+    "id": "q4",
+    "query": "What kind of embeddings are used for semantic search in this system?",
+    "answerable": true,
+    "expected_doc_keys": ["rag_notes_tutorial"]
+  },
+  {
+    "id": "q5",
+    "query": "How does this project make sure answers are grounded in documents instead of only the model?",
+    "answerable": true,
+    "expected_doc_keys": ["sample_docs", "rag_notes_tutorial"]
+  },
+  {
+    "id": "q6",
+    "query": "What metadata does the system track for each document or chunk?",
+    "answerable": true,
+    "expected_doc_keys": ["rag_notes_tutorial", "policy_notes"]
+  },
+  {
+    "id": "q7",
+    "query": "Does the system support version-aware retrieval or document versions?",
+    "answerable": true,
+    "expected_doc_keys": ["rag_notes_tutorial"]
+  },
+  {
+    "id": "q8",
+    "query": "What is the role of LanceDB in this architecture?",
+    "answerable": true,
+    "expected_doc_keys": ["sample_docs", "rag_notes_tutorial"]
+  },
+  {
+    "id": "q9",
+    "query": "Why do we use chunking and overlap when indexing documents?",
+    "answerable": true,
+    "expected_doc_keys": ["rag_notes_tutorial"]
+  },
+  {
+    "id": "q10",
+    "query": "How does the system use metadata such as doc_type in retrieval?",
+    "answerable": true,
+    "expected_doc_keys": ["rag_notes_tutorial", "policy_notes"]
+  },
+  {
+    "id": "q11",
+    "query": "What kind of questions is this RAG system meant to answer?",
+    "answerable": true,
+    "expected_doc_keys": ["sample_docs", "rag_notes_tutorial"]
+  },
+  {
+    "id": "q12",
+    "query": "Does the system use a local LLM or a hosted API for answering questions?",
+    "answerable": true,
+    "expected_doc_keys": ["rag_notes_tutorial"]
+  },
+  {
+    "id": "q13",
+    "query": "How does the system decide when it should refuse to answer a question?",
+    "answerable": false,
+    "expected_doc_keys": ["rag_notes_tutorial", "policy_notes"]
+  },
+  {
+    "id": "q14",
+    "query": "What is the high-level flow from documents to user answer in this RAG system?",
+    "answerable": true,
+    "expected_doc_keys": ["sample_docs", "rag_notes_tutorial"]
+  },
+
+
+  {
+    "id": "q15",
+    "query": "How many users are currently using this RAG system in production?",
+    "answerable": false,
+    "expected_doc_keys": []
+  },
+  {
+    "id": "q16",
+    "query": "What is the monthly cloud cost of running this system?",
+    "answerable": false,
+    "expected_doc_keys": []
+  },
+  {
+    "id": "q17",
+    "query": "How do I cook pasta using this RAG system?",
+    "answerable": false,
+    "expected_doc_keys": []
+  },
+  {
+    "id": "q18",
+    "query": "What is the salary of the engineer who built this system?",
+    "answerable": false,
+    "expected_doc_keys": []
+  },
+  {
+    "id": "q19",
+    "query": "Which programming language should I learn to become a game developer?",
+    "answerable": false,
+    "expected_doc_keys": []
+  },
+  {
+    "id": "q20",
+    "query": "What is the official documentation URL for LanceDB?",
+    "answerable": false,
+    "expected_doc_keys": []
+  }
+]
