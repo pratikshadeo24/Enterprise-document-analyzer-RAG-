@@ -5,10 +5,12 @@ from typing import List, Dict, Tuple, Optional
 import lancedb
 from sentence_transformers import SentenceTransformer
 
+from rag_core.semantic_chunking import embedding_semantic_chunk_text
+
 from .models import Document
-from .chunking import word_chunk_text
+from .word_chunking import word_chunk_text
 from .embeddings import compute_embeddings
-from .config import CHUNK_SIZE_WORDS, CHUNK_OVERLAP_WORDS
+from .config import CHUNK_SIZE_WORDS, CHUNK_OVERLAP_WORDS, CHUNK_STRATEGY
 from pypdf import PdfReader 
 from docx import Document as DocxDocument     # <-- NEW
 
@@ -123,11 +125,22 @@ def index_documents_version(
         print(f"  -> found {len(page_fragments)} page fragments")
 
         for page_number, page_text in page_fragments:
-            chunks = word_chunk_text(
-                page_text,
-                chunk_size=CHUNK_SIZE_WORDS,
-                overlap=CHUNK_OVERLAP_WORDS,
-            )
+            if CHUNK_STRATEGY == "word":
+                chunks = word_chunk_text(
+                    page_text,
+                    chunk_size=CHUNK_SIZE_WORDS,
+                    overlap=CHUNK_OVERLAP_WORDS,
+                )
+            elif CHUNK_STRATEGY == "semantic":
+                chunks = embedding_semantic_chunk_text(
+                    page_text,
+                    model=model,
+                    target_chunk_size_words=CHUNK_SIZE_WORDS,
+                    min_chunk_size_words=int(CHUNK_SIZE_WORDS * 0.4),
+                    similarity_percentile=30.0
+                )
+            else:
+                raise ValueError(f"Unknown chunking strategy: {CHUNK_STRATEGY}")
             print(f"    page={page_number} -> produced {len(chunks)} chunks")
 
             if not chunks:

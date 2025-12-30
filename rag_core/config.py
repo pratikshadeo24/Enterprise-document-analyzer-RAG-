@@ -14,6 +14,7 @@ EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 TABLE_NAME = "doc_chunks_versions"
 
 # Chunking
+CHUNK_STRATEGY = "semantic"  # currently only "word" is supported
 CHUNK_SIZE_WORDS = 80
 CHUNK_OVERLAP_WORDS = 20
 
@@ -32,3 +33,4 @@ CONF_W_MARGIN = 0.30
 
 MIN_TOP1_SCORE = 0.30      # was ~0.36–0.40 earlier
 MIN_CONFIDENCE = 0.27      # was ~0.32–0.38 earlier
+

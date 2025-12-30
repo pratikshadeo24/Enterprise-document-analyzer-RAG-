@@ -6,3 +6,4 @@ pandas
 requests
 pypdf>=4.0.0
 python-docx
+spacy
