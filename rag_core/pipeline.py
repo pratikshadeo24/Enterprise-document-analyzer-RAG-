@@ -1,8 +1,9 @@
 from typing import Optional, Dict, Any
-
+from .rerank import rerank_chunks_for_query
 from sentence_transformers import SentenceTransformer
 import pandas as pd
 import lancedb
+from .config import USE_RERANKER
 
 from .retrieval import (
     retrieve_relevant_chunks,
@@ -111,6 +112,8 @@ def rag_answer(
             "rejected": True,
         }
     # ----------------------------------------
+    if USE_RERANKER:
+        df = rerank_chunks_for_query(query_text, df)
 
     context = build_context_from_chunks(df)
     sources = extract_sources(df)

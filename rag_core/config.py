@@ -29,8 +29,14 @@ CONF_TOPK_AVG = 3                # how many scores to average
 CONF_W_TOP1 = 0.45
 CONF_W_AVG_TOPK = 0.25
 CONF_W_MARGIN = 0.30
-
-
 MIN_TOP1_SCORE = 0.30      # was ~0.36–0.40 earlier
 MIN_CONFIDENCE = 0.27      # was ~0.32–0.38 earlier
 
+
+USE_RERANKER = os.getenv("USE_RERANKER", "false").lower() == "true"
+
+RERANKER_MODEL_NAME = os.getenv(
+    "RERANKER_MODEL_NAME",
+    "cross-encoder/ms-marco-MiniLM-L-6-v2",  # good, small reranker
+)
+RERANK_TOP_N = int(os.getenv("RERANK_TOP_N", "5"))  # how many to rerank within top-k
