@@ -1,17 +1,45 @@
-from rag_core.config import DATA_DIR, DB_DIR, TABLE_NAME, EMBEDDING_MODEL_NAME
-from rag_core.db import connect_lancedb
+from rag_core.config import EMBEDDING_MODEL_NAME
 from rag_core.embeddings import get_embedding_model
-from rag_core.indexing import index_documents_version
+from rag_core.indexing import index_paths_incremental
+
+
+import argparse
+from pathlib import Path
+from typing import List
+
+from rag_core.embeddings import get_embedding_model
+from rag_core.indexing import index_paths_incremental
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Incrementally index document paths into LanceDB."
+    )
+    parser.add_argument(
+        "paths",
+        nargs="+",
+        help="Paths to document files to index (txt, md, pdf, docx).",
+    )
+    return parser.parse_args()
 
 
 def main():
-    print(f"DATA_DIR: {DATA_DIR}")
-    model = get_embedding_model(EMBEDDING_MODEL_NAME)
-    db = connect_lancedb(DB_DIR)
+    args = parse_args()
+    raw_paths: List[str] = args.paths
+    paths = [Path(p).resolve() for p in raw_paths]
 
-    # For now we just index as version=1 (or bump this manually later)
-    table = index_documents_version(DATA_DIR, model, db, TABLE_NAME, version=1)
-    print(f"Indexing completed. Table name: {TABLE_NAME}, rows: {table.count_rows()}")
+    print("[INDEX_DOCS] Loading embedding model...")
+    model = get_embedding_model(EMBEDDING_MODEL_NAME)
+
+    print("[INDEX_DOCS] Incrementally indexing provided paths...")
+    summaries = index_paths_incremental(paths, model=model)
+
+    print("\n[Indexing Summary]")
+    for s in summaries:
+        print(
+            f"- doc_key={s['doc_key']} v={s['doc_version']} "
+            f"doc_type={s['doc_type']} chunks={s['num_chunks']} source={s['source']}"
+        )
 
 
 if __name__ == "__main__":

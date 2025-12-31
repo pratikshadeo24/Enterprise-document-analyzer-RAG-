@@ -3,6 +3,9 @@ from .rerank import rerank_chunks_for_query
 from sentence_transformers import SentenceTransformer
 import pandas as pd
 import lancedb
+from rag_core.config import DB_DIR, TABLE_NAME, EMBEDDING_MODEL_NAME
+from rag_core.db import connect_lancedb
+from rag_core.embeddings import get_embedding_model
 from .config import USE_RERANKER
 
 from .retrieval import (
@@ -80,8 +83,6 @@ def _should_reject(df: pd.DataFrame) -> bool:
 
 def rag_answer(
     query_text: str,
-    model: SentenceTransformer,
-    table: lancedb.table.LanceTable,
     top_k: int = 8,
     where: Optional[str] = None,
     latest_only: bool = True,
@@ -92,6 +93,9 @@ def rag_answer(
       - latest-only version routing
       - confidence-based abstention
     """
+    model = get_embedding_model(EMBEDDING_MODEL_NAME)
+    db = connect_lancedb(DB_DIR)
+    table = db.open_table(TABLE_NAME)
     df = retrieve_relevant_chunks(table, query_text, model, top_k=top_k, where=where)
 
     if latest_only:

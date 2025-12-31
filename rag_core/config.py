@@ -32,8 +32,8 @@ CONF_W_MARGIN = 0.30
 MIN_TOP1_SCORE = 0.30      # was ~0.36–0.40 earlier
 MIN_CONFIDENCE = 0.27      # was ~0.32–0.38 earlier
 
-
-USE_RERANKER = os.getenv("USE_RERANKER", "false").lower() == "true"
+# Reranking config
+USE_RERANKER = os.getenv("USE_RERANKER", False)
 
 RERANKER_MODEL_NAME = os.getenv(
     "RERANKER_MODEL_NAME",
